@@ -1,0 +1,50 @@
+{
+  "devFiles": [],
+  "pages": {
+    "/_app": [
+      "static/runtime/webpack-42652fa8b82c329c0559.js",
+      "static/chunks/commons.7909c8ee0ac96613db63.js",
+      "static/runtime/main-f9c8a776c8e0c15ed24f.js"
+    ],
+    "/App": [
+      "static/runtime/webpack-42652fa8b82c329c0559.js",
+      "static/chunks/commons.7909c8ee0ac96613db63.js",
+      "static/runtime/main-f9c8a776c8e0c15ed24f.js"
+    ],
+    "/Cadastro": [
+      "static/runtime/webpack-42652fa8b82c329c0559.js",
+      "static/chunks/commons.7909c8ee0ac96613db63.js",
+      "static/runtime/main-f9c8a776c8e0c15ed24f.js"
+    ],
+    "/index": [
+      "static/runtime/webpack-42652fa8b82c329c0559.js",
+      "static/chunks/commons.7909c8ee0ac96613db63.js",
+      "static/runtime/main-f9c8a776c8e0c15ed24f.js"
+    ],
+    "/Login": [
+      "static/runtime/webpack-42652fa8b82c329c0559.js",
+      "static/chunks/commons.7909c8ee0ac96613db63.js",
+      "static/runtime/main-f9c8a776c8e0c15ed24f.js"
+    ],
+    "/Post": [
+      "static/runtime/webpack-42652fa8b82c329c0559.js",
+      "static/chunks/commons.7909c8ee0ac96613db63.js",
+      "static/runtime/main-f9c8a776c8e0c15ed24f.js"
+    ],
+    "/Profile": [
+      "static/runtime/webpack-42652fa8b82c329c0559.js",
+      "static/chunks/commons.7909c8ee0ac96613db63.js",
+      "static/runtime/main-f9c8a776c8e0c15ed24f.js"
+    ],
+    "/_error": [
+      "static/runtime/webpack-42652fa8b82c329c0559.js",
+      "static/chunks/commons.7909c8ee0ac96613db63.js",
+      "static/runtime/main-f9c8a776c8e0c15ed24f.js"
+    ],
+    "/": [
+      "static/runtime/webpack-42652fa8b82c329c0559.js",
+      "static/chunks/commons.7909c8ee0ac96613db63.js",
+      "static/runtime/main-f9c8a776c8e0c15ed24f.js"
+    ]
+  }
+}

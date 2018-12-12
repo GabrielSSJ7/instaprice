@@ -1,0 +1,10 @@
+Back-end/node_modules
+Back-end/package-lock.json
+Back-end/yarn.lock
+
+Front-end/php
+
+Front-end/node_modules
+
+Front-end/javascript/package-lock.json
+Front-end/javascript/yarn.lock

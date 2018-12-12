@@ -1,0 +1,41 @@
+    GET INITIAL PROPS
+
+static async getInitialProps({ store, isServer, req }) {
+   // store.dispatch(getMainData());
+   //console.log(req);
+
+    // const cookie = req ? req.headers.cookie : "";
+    // console.log("getInitialProps", req.headers)
+    // if (cookie) {
+    //   const index = cookie.indexOf("bearer");
+    //   let AuthToken = cookie.substr(index);
+
+    //   AuthToken = AuthToken.split("%20").join(" ");
+
+    //   const instance = axios.create({
+    //     headers: { Authorization: AuthToken }
+    //   });
+
+    //   try {
+    //     const res = await instance.get(`${URL}main`);
+
+    //     return { produto: res.data };
+    //   } catch (e) {
+
+    //     return {produto: []};
+    //   }
+    // }
+
+    // return {produto: []};
+    
+    return { custom: "custom" }; // you can pass some custom props to component from here
+  }
+
+
+        ==mapDispatchToProps==
+
+   const mapDispatchToProps = dispatch => {
+  return {
+    produto: bindActionCreators(produto, dispatch)
+  };
+};
