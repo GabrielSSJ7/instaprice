@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1021,7 +1021,7 @@ var Template = function Template(props) {
     },
     __self: this
   })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "container",
+    className: "container-fluid",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 88
@@ -1129,11 +1129,32 @@ _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__["library"].add(_f
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faPlusSquare"]);
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_2__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faComment"]);
 
+var userLogOut = function userLogOut() {
+  try {
+    FB.getLoginStatus(function (response) {
+      if (response.status === "connected") {
+        console.log("connected");
+        FB.logout(function (response) {
+          localStorage.removeItem("authToken");
+          window.location = "/"; // TO REFRESH THE PAGE
+        });
+      } else {
+        localStorage.removeItem("authToken");
+        window.location = "/"; // TO REFRESH THE PAGE
+
+        console.log("not connected");
+      }
+    });
+  } catch (msg) {
+    console.log(msg);
+  }
+};
+
 var TopMenu = function TopMenu(props) {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 22
+      lineNumber: 42
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
@@ -1144,21 +1165,21 @@ var TopMenu = function TopMenu(props) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 23
+      lineNumber: 43
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 30
+      lineNumber: 50
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "navbar-brand",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 31
+      lineNumber: 51
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -1169,7 +1190,7 @@ var TopMenu = function TopMenu(props) {
     alt: "",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 32
+      lineNumber: 52
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
@@ -1178,21 +1199,23 @@ var TopMenu = function TopMenu(props) {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 39
+      lineNumber: 59
     },
     __self: this
-  }, "Instaprice"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    href: "/Profile?produto=" + props.produto,
-    as: "/profile/",
+  }, "Instaprice"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: function onClick() {
+      return userLogOut();
+    },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42
+      lineNumber: 63
     },
     __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+  }, "logout"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    href: "/Profile",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43
+      lineNumber: 64
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_3__["FontAwesomeIcon"], {
@@ -1200,10 +1223,10 @@ var TopMenu = function TopMenu(props) {
     size: "2x",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 45
+      lineNumber: 65
     },
     __self: this
-  })))));
+  }))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (TopMenu);
@@ -1214,22 +1237,48 @@ var TopMenu = function TopMenu(props) {
 /*!****************************!*\
   !*** ./components/Util.js ***!
   \****************************/
-/*! exports provided: validateToken, curtirProduto, comentar */
+/*! exports provided: getAddress, renderAddress, renderCards, getCards, validateToken, curtirProduto, comentar, inserirProduto, editUser, loginWithFacebook */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getAddress", function() { return getAddress; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "renderAddress", function() { return renderAddress; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "renderCards", function() { return renderCards; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCards", function() { return getCards; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "validateToken", function() { return validateToken; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "curtirProduto", function() { return curtirProduto; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "comentar", function() { return comentar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "inserirProduto", function() { return inserirProduto; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editUser", function() { return editUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loginWithFacebook", function() { return loginWithFacebook; });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "@babel/runtime/regenerator");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "axios");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/router */ "next/router");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _pages_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../pages/index */ "./pages/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _pages_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../pages/index */ "./pages/index.js");
+/* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! firebase */ "firebase");
+/* harmony import */ var firebase__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(firebase__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! js-cookie */ "js-cookie");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "@fortawesome/fontawesome-svg-core");
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "@fortawesome/react-fontawesome");
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "@fortawesome/free-solid-svg-icons");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _config_types__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../config/types */ "./config/types.js");
 
+var _jsxFileName = "C:\\xampp\\htdocs\\instaprice\\Front-end\\javascript\\components\\Util.js";
+
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -1238,7 +1287,229 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-var URL = "http://localhost:4000/";
+
+
+
+
+
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faEdit"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faUser"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_7__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faTrash"]);
+
+var getAddress = function getAddress(ctx) {
+  var instance = axios__WEBPACK_IMPORTED_MODULE_2___default.a.create({
+    headers: {
+      Authorization: "bearer ".concat(localStorage.getItem("authToken"))
+    }
+  });
+  instance.get("".concat(_config_types__WEBPACK_IMPORTED_MODULE_10__["URL"], "address/").concat(localStorage.getItem("authToken"))).then(function (res) {
+    renderAddress(res.data, ctx);
+  });
+};
+var renderAddress = function renderAddress(enderecos, ctx) {
+  var elementEndereco = [];
+  var lastIndex = 0;
+
+  var _loop = function _loop(x) {
+    lastIndex++;
+    elementEndereco.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "jumbotron jumbotron-fluid",
+      key: x,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 34
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "container",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 35
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 36
+      },
+      __self: this
+    }, enderecos[x].endereco), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+      className: "pull-right",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 38
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+      onClick: function onClick() {
+        ctx.deleteAddress(enderecos[x].id);
+      },
+      "data-original-title": "Edit this user",
+      "data-toggle": "tooltip",
+      className: "btn btn-sm btn-danger",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 39
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_8__["FontAwesomeIcon"], {
+      icon: "trash",
+      size: "1x",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 47
+      },
+      __self: this
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+      onClick: function onClick() {
+        ctx.onUpdateItems(x, enderecos);
+      },
+      "data-original-title": "Edit this user",
+      "data-toggle": "tooltip",
+      className: "btn btn-sm btn-warning",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 49
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_8__["FontAwesomeIcon"], {
+      icon: "edit",
+      size: "1x",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 57
+      },
+      __self: this
+    }))))));
+  };
+
+  for (var x = 0; x < enderecos.length; x++) {
+    _loop(x);
+  }
+
+  ctx.setState({
+    arrayAddress: elementEndereco
+  });
+};
+var renderCards = function renderCards(cards, ctx) {
+  var cardElement = [];
+
+  var _loop2 = function _loop2(x) {
+    cardElement.push(react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "jumbotron jumbotron-fluid",
+      key: x,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 72
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: "container",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 73
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h3", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 74
+      },
+      __self: this
+    }, cards[x].nome), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 76
+      },
+      __self: this
+    }, "N\xFAmero: ", cards[x].numero), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 77
+      },
+      __self: this
+    }, "Validade: ", cards[x].validade), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 78
+      },
+      __self: this
+    }, "Bandeira: ", cards[x].bandeira), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 79
+      },
+      __self: this
+    }, "C\xF3digo de seguran\xE7a: ", cards[x].codigo_seguranca), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
+      className: "pull-right",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 81
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+      onClick: function onClick() {
+        ctx.deleteCards(cards[x].id);
+      },
+      "data-original-title": "Edit this user",
+      "data-toggle": "tooltip",
+      className: "btn btn-sm btn-danger",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 82
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_8__["FontAwesomeIcon"], {
+      icon: "trash",
+      size: "1x",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 90
+      },
+      __self: this
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("button", {
+      onClick: function onClick() {
+        ctx.onUpdateItems(x, cards);
+      },
+      "data-original-title": "Edit this user",
+      "data-toggle": "tooltip",
+      className: "btn btn-sm btn-warning",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 92
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_8__["FontAwesomeIcon"], {
+      icon: "edit",
+      size: "1x",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 100
+      },
+      __self: this
+    }))))));
+  };
+
+  for (var x = 0; x < cards.length; x++) {
+    _loop2(x);
+  }
+
+  ctx.setState({
+    arrayCards: cardElement
+  });
+};
+var getCards = function getCards(ctx) {
+  var instance = axios__WEBPACK_IMPORTED_MODULE_2___default.a.create({
+    headers: {
+      Authorization: "bearer ".concat(localStorage.getItem("authToken"))
+    }
+  });
+  instance.post("".concat(_config_types__WEBPACK_IMPORTED_MODULE_10__["URL"], "cartoes"), {
+    token: localStorage.getItem("authToken")
+  }).then(function (res) {
+    renderCards(res.data, ctx);
+  });
+};
 var validateToken =
 /*#__PURE__*/
 function () {
@@ -1250,16 +1521,16 @@ function () {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("".concat(URL, "validateToken"), {
+            return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(_config_types__WEBPACK_IMPORTED_MODULE_10__["URL"], "validateToken"), {
               token: token
             }).then(function (res) {
               console.log(res.data);
 
               if (!res.data) {
                 localStorage.removeItem("authToken");
-                next_router__WEBPACK_IMPORTED_MODULE_2___default.a.push("/Login");
+                next_router__WEBPACK_IMPORTED_MODULE_3___default.a.push("/Login");
               } else {
-                next_router__WEBPACK_IMPORTED_MODULE_2___default.a.push("/");
+                next_router__WEBPACK_IMPORTED_MODULE_3___default.a.push("/");
               }
 
               return res.data;
@@ -1279,12 +1550,12 @@ function () {
 }();
 var curtirProduto = function curtirProduto(prodId, cb) {
   var token = localStorage.getItem("authToken");
-  var instance = axios__WEBPACK_IMPORTED_MODULE_1___default.a.create({
+  var instance = axios__WEBPACK_IMPORTED_MODULE_2___default.a.create({
     headers: {
       Authorization: "bearer ".concat(token)
     }
   });
-  instance.post("".concat(URL, "like"), {
+  instance.post("".concat(_config_types__WEBPACK_IMPORTED_MODULE_10__["URL"], "like"), {
     produtoId: prodId,
     token: token
   }).then(function (res) {
@@ -1294,17 +1565,194 @@ var curtirProduto = function curtirProduto(prodId, cb) {
 };
 var comentar = function comentar(prodId, comentario) {
   var token = localStorage.getItem("authToken");
-  var instance = axios__WEBPACK_IMPORTED_MODULE_1___default.a.create({
+  var instance = axios__WEBPACK_IMPORTED_MODULE_2___default.a.create({
     headers: {
       Authorization: "bearer ".concat(token)
     }
   });
-  instance.post("".concat(URL, "comment"), {
+  instance.post("".concat(_config_types__WEBPACK_IMPORTED_MODULE_10__["URL"], "comment"), {
     produtoId: prodId,
     token: token,
     comentario: comentario
   }).then(function (res) {
-    _pages_index__WEBPACK_IMPORTED_MODULE_3__["default"].refresh(res.data);
+    _pages_index__WEBPACK_IMPORTED_MODULE_4__["default"].refresh(res.data);
+  });
+};
+var inserirProduto = function inserirProduto(event, ctx) {
+  if (event.name != null) {
+    var data = {
+      nome: ctx.state.nome,
+      preco: ctx.state.preco,
+      desc: ctx.state.desc,
+      token: localStorage.getItem("authToken")
+    };
+    uploadImage(data, "insert", event, ctx);
+  } else if (ctx.state.nome == null || ctx.state.nome == "") {
+    ctx.setState({
+      erro: "É necessário que o item tenha nome"
+    });
+  } else if (ctx.state.preco == null || ctx.state.preco == "") {
+    ctx.setState({
+      erro: "É necessário que o item tenha preco"
+    });
+  } else if (ctx.state.desc == null || ctx.state.desc == "") {
+    ctx.setState({
+      erro: "É necessário descrever o item"
+    });
+  } else {
+    ctx.setState({
+      erro: "É necessário ter uma imagem"
+    });
+  }
+};
+var editUser = function editUser(data, event, ctx) {
+  data = _objectSpread({}, data, {
+    token: localStorage.getItem("authToken")
+  });
+
+  if (event != null) {
+    console.log("upload");
+    uploadImage(data, "useredit", event, ctx);
+  } else {
+    console.log("req");
+    var token = localStorage.getItem("authToken");
+    var instance = axios__WEBPACK_IMPORTED_MODULE_2___default.a.create({
+      headers: {
+        Authorization: "bearer ".concat(token)
+      }
+    });
+    instance.post("".concat(_config_types__WEBPACK_IMPORTED_MODULE_10__["URL"], "useredit"), data).then(function (res) {
+      ctx.setState({
+        openEditUser: false,
+        msg: "Alterado com sucesso"
+      });
+      ctx.getAllUserData();
+    }).catch(function (err) {
+      ctx.getAllUserData();
+      ctx.setState({
+        openEditUser: false,
+        msg: err.response.data
+      });
+    });
+  }
+};
+
+var uploadImage = function uploadImage(data, urlRequest, event, ctx) {
+  var storageRef = firebase__WEBPACK_IMPORTED_MODULE_5___default.a.storage().ref();
+  var metadata = {
+    contentType: event.type
+  };
+  var uploadTask = storageRef.child("images/" + event.name + Date.now()).put(event, metadata); // Listen for state changes, errors, and completion of the upload.
+
+  uploadTask.on(firebase__WEBPACK_IMPORTED_MODULE_5___default.a.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+  function (snapshot) {
+    // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+    var progress = snapshot.bytesTransferred / snapshot.totalBytes * 100;
+    console.log("Upload is " + progress + "% done");
+    ctx.setState({
+      progress: "".concat(progress.toFixed(2), "%")
+    });
+
+    switch (snapshot.state) {
+      case firebase__WEBPACK_IMPORTED_MODULE_5___default.a.storage.TaskState.PAUSED:
+        // or 'paused'
+        console.log("Upload is paused");
+        break;
+
+      case firebase__WEBPACK_IMPORTED_MODULE_5___default.a.storage.TaskState.RUNNING:
+        // or 'running'
+        console.log("Upload is running");
+        break;
+    }
+  }, function (error) {
+    // A full list of error codes is available at
+    // https://firebase.google.com/docs/storage/web/handle-errors
+    switch (error.code) {
+      case "storage/unauthorized":
+        // User doesn't have permission to access the object
+        break;
+
+      case "storage/canceled":
+        // User canceled the upload
+        break;
+
+      case "storage/unknown":
+        // Unknown error occurred, inspect error.serverResponse
+        break;
+
+      case "storage/invalid-argument":
+        break;
+    }
+  }, function () {
+    // Upload completed successfully, now we can get the download URL
+    uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+      data = _objectSpread({}, data, {
+        foto: downloadURL,
+        imagem: downloadURL
+      });
+      var instance = axios__WEBPACK_IMPORTED_MODULE_2___default.a.create({
+        headers: {
+          Authorization: "bearer ".concat(localStorage.getItem("authToken"))
+        }
+      });
+      instance.post("".concat(_config_types__WEBPACK_IMPORTED_MODULE_10__["URL"]).concat(urlRequest), data).then(function (res) {
+        console.log("upload", res);
+        editPhotoUserSuccess(urlRequest, ctx);
+      }).catch(function (err) {
+        editPhotoUserFail(urlRequest, ctx);
+      });
+    }).catch(function (err) {
+      console.log(err);
+    });
+  });
+};
+
+var editPhotoUserSuccess = function editPhotoUserSuccess(urlRequest, ctx) {
+  if (urlRequest == "useredit") {
+    ctx.setState({
+      open: false
+    });
+    ctx.getAllUserData();
+  }
+};
+
+var editPhotoUserFail = function editPhotoUserFail(urlRequest, ctx) {
+  if (urlRequest == "useredit") {
+    ctx.getAllUserData();
+    ctx.setState({
+      msg: err.response ? err.response.data : err
+    });
+  }
+};
+
+var loginWithFacebook = function loginWithFacebook() {
+  FB.login(function (response) {
+    if (response.authResponse) {
+      var url = "/me?fields=name,email";
+      FB.api(url, function (response) {
+        console.log(response);
+        var data = {
+          nome: response.name,
+          email: response.email,
+          foto: Object(_config_types__WEBPACK_IMPORTED_MODULE_10__["FACEBOOK_PROFILE_PIC_URL"])(response.id)
+        };
+        axios__WEBPACK_IMPORTED_MODULE_2___default.a.post("".concat(_config_types__WEBPACK_IMPORTED_MODULE_10__["URL"], "signin-with-facebook"), data).then(function (res) {
+          localStorage.setItem("authToken", res.data.token);
+          js_cookie__WEBPACK_IMPORTED_MODULE_6___default.a.set("Authorization", "bearer ".concat(res.data.token), {
+            expires: 1
+          });
+          axios__WEBPACK_IMPORTED_MODULE_2___default.a.defaults.headers.common["Authorization"] = "bearer ".concat(res.data.token); // for all requests
+
+          next_router__WEBPACK_IMPORTED_MODULE_3___default.a.push("/");
+        }).catch(function (err) {
+          console.log(err);
+        });
+      });
+    } else {
+      console.log("User cancelled login or did not fully authorize.");
+    }
+  }, {
+    scope: "email"
   });
 };
 
@@ -1477,15 +1925,19 @@ var initStore = function initStore() {
 /*!*************************!*\
   !*** ./config/types.js ***!
   \*************************/
-/*! exports provided: GET_MAIN_DATA, URL */
+/*! exports provided: GET_MAIN_DATA, URL, FACEBOOK_PROFILE_PIC_URL */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_MAIN_DATA", function() { return GET_MAIN_DATA; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "URL", function() { return URL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FACEBOOK_PROFILE_PIC_URL", function() { return FACEBOOK_PROFILE_PIC_URL; });
 var GET_MAIN_DATA = "getmaindata";
 var URL = "http://localhost:4000/";
+var FACEBOOK_PROFILE_PIC_URL = function FACEBOOK_PROFILE_PIC_URL(userId) {
+  return "https://graph.facebook.com/".concat(userId, "/picture?type=large");
+};
 
 /***/ }),
 
@@ -1544,7 +1996,8 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var socketUrl = "http://192.168.15.14:4000";
+var socketUrl = "http://localhost:4000";
+var socket = null;
 
 var Index =
 /*#__PURE__*/
@@ -1552,22 +2005,26 @@ function (_React$Component) {
   _inherits(Index, _React$Component);
 
   function Index(props) {
-    var _this;
-
     _classCallCheck(this, Index);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Index).call(this, props));
-    var socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2___default()(socketUrl);
-    socket.on("connect", function () {
-      console.log("connected on Socket.Io", socket.id);
-    });
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(Index).call(this, props));
   }
 
   _createClass(Index, [{
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {}
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      Object(_components_Util__WEBPACK_IMPORTED_MODULE_4__["validateToken"])(localStorage.getItem("authToken"));
+      // socket = io(socketUrl);
+      // socket.emit('desconectar', { reason: 'porque eu quis'})
+      // socket.on("connect", function() {
+      //   //console.log("connected on Socket.Io", socket.id);
+      // });
+      Object(_components_Util__WEBPACK_IMPORTED_MODULE_4__["validateToken"])(localStorage.getItem("authToken")); // socket.on("usuarioSaiu", function(data) {
+      //   //socket.emit("usuarioSaiu",{ token: localStorage.getItem("authToken")})
+      //   console.log("usuario saiu", data);
+      // });
 
       if (this.props.produto.length === 0) {
         this.props.getMainData("bearer ".concat(localStorage.getItem("authToken")));
@@ -1579,27 +2036,27 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Template__WEBPACK_IMPORTED_MODULE_6__["default"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 61
+          lineNumber: 69
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_TopMenu__WEBPACK_IMPORTED_MODULE_7__["default"], {
         props: this.props,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 62
+          lineNumber: 70
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_RenderProd__WEBPACK_IMPORTED_MODULE_5__["default"], {
         produto: this.props.produto,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 64
+          lineNumber: 72
         },
         __self: this
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_BottomMenu__WEBPACK_IMPORTED_MODULE_8__["default"], {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 66
+          lineNumber: 74
         },
         __self: this
       }));
@@ -1641,7 +2098,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 var mapStateToProps = function mapStateToProps(state) {
-  console.log("state.main", state);
+  //console.log("state.main", state)
   return {
     produto: state.MainReducer.produto
   };
@@ -1651,7 +2108,7 @@ var mapStateToProps = function mapStateToProps(state) {
 
 /***/ }),
 
-/***/ 4:
+/***/ 3:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/
@@ -1715,6 +2172,28 @@ module.exports = require("@fortawesome/react-fontawesome");
 /***/ (function(module, exports) {
 
 module.exports = require("axios");
+
+/***/ }),
+
+/***/ "firebase":
+/*!***************************!*\
+  !*** external "firebase" ***!
+  \***************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("firebase");
+
+/***/ }),
+
+/***/ "js-cookie":
+/*!****************************!*\
+  !*** external "js-cookie" ***!
+  \****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("js-cookie");
 
 /***/ }),
 

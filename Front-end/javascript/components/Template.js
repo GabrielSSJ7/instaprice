@@ -85,7 +85,7 @@ const Template = props => (
       <link rel="stylesheet" type="text/css" href="../static/css/main.css" />
     </Head>
     
-    <div className="container">{props.children}</div>
+    <div className="container-fluid">{props.children}</div>
 
     <script src="../static/vendor/jquery/jquery-3.2.1.min.js" />
 

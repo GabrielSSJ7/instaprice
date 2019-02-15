@@ -6,6 +6,7 @@ import BottomMenu from "../components/BottomMenu";
 import Template from "../components/Template";
 import axios from 'axios'
 
+import { inserirProduto } from '../components/Util';
 
 import { URL as URL_ } from "../config/types";
 
@@ -51,115 +52,11 @@ class Post extends React.Component {
     }
   };
 
-  inserirProduto(event,ctx) {
-    if(event.name != null) {
-    var storageRef = firebase.storage().ref();
-
-    const metadata = {
-      contentType: event.type
-    };
-
-    let uploadTask = storageRef
-      .child("images/" + event.name + Date.now())
-      .put(event, metadata);
-
-    // Listen for state changes, errors, and completion of the upload.
-    uploadTask.on(
-      firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
-      function(snapshot) {
-        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log("Upload is " + progress + "% done");
-
-        ctx.setState({ progress: `${progress.toFixed(2)}%` })
-        switch (snapshot.state) {
-          case firebase.storage.TaskState.PAUSED: // or 'paused'
-            console.log("Upload is paused");
-            break;
-          case firebase.storage.TaskState.RUNNING: // or 'running'
-            console.log("Upload is running");
-            break;
-        }
-      },
-      function(error) {
-        // A full list of error codes is available at
-        // https://firebase.google.com/docs/storage/web/handle-errors
-        switch (error.code) {
-          case "storage/unauthorized":
-            // User doesn't have permission to access the object
-            break;
-
-          case "storage/canceled":
-            // User canceled the upload
-            break;
-
-          case "storage/unknown":
-            // Unknown error occurred, inspect error.serverResponse
-            break;
-
-          case "storage/invalid-argument":
-            break;
-        }
-      },
-      function() {
-        // Upload completed successfully, now we can get the download URL
-        uploadTask.snapshot.ref
-          .getDownloadURL()
-          .then(function(downloadURL) {
-            const data = {
-              nome: ctx.state.nome,
-              preco: ctx.state.preco,
-              desc: ctx.state.desc,
-              imagem: downloadURL,
-              token: localStorage.getItem("authToken")
-            };
-
-            const instance = axios.create({
-              headers: {
-                Authorization: `bearer ${localStorage.getItem("authToken")}`
-              }
-            });
-
-            instance.post(`${URL_}insert`, data).then(res => {
-              Router.push("/");
-
-            })
-            .catch(err => {
-              ctx.setState({
-                erro: err.response ? err.response.data : err
-              })
-            });
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      }
-    );
-    } else if(ctx.state.nome == null || ctx.state.nome == "") {
-      ctx.setState({
-        erro: "É necessário que o item tenha nome"
-      })
-    }
-    else if(ctx.state.preco == null || ctx.state.preco == "") {
-      ctx.setState({
-        erro: "É necessário que o item tenha preco"
-      })
-    }
-    else if(ctx.state.desc == null || ctx.state.desc == "") {
-      ctx.setState({
-        erro: "É necessário descrever o item"
-      })
-    }
-     else {
-      ctx.setState({
-        erro: "É necessário ter uma imagem"
-      })
-    }
-  }
+  
 
   divulgar() {
     console.log(this.state.uploadImage)
-    this.inserirProduto(this.state.uploadImage, this)
+    inserirProduto(this.state.uploadImage, this)
   }
 
   render() {

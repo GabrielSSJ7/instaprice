@@ -4,10 +4,10 @@ import axios from "axios";
 import Link from "next/link";
 import Router from "next/router";
 import Template from "../components/Template";
-import Cookies from 'js-cookie';
-import { validateToken } from "../components/Util";
+import Cookies from "js-cookie";
+import { validateToken, loginWithFacebook } from "../components/Util";
 
-const URL = "http://localhost:4000/";
+import { URL } from "../config/types";
 
 class Login extends React.Component {
   constructor(props) {
@@ -17,17 +17,24 @@ class Login extends React.Component {
       funcionando: false,
       email: "",
       password: "",
-      error: ""
+      error: "",
+      rememberMe: false
     };
   }
 
   redirectIfLogged() {
     if (localStorage.getItem("authToken")) {
-      validateToken(localStorage.getItem("authToken"));    
+      validateToken(localStorage.getItem("authToken"));
     }
   }
 
   componentDidMount() {
+    if (localStorage.getItem("emailrememberme")) {
+      this.setState({
+        email: localStorage.getItem("emailrememberme"),
+        rememberMe: true
+      });
+    }
     this.redirectIfLogged();
   }
 
@@ -39,10 +46,23 @@ class Login extends React.Component {
     axios
       .post(`${URL}login`, data)
       .then(res => {
+        if (this.state.rememberMe) {
+          if (this.state.email != "") {
+            localStorage.setItem("emailrememberme", this.state.email);
+          }
+        } else {
+          localStorage.removeItem("emailrememberme");
+        }
+
         localStorage.setItem("authToken", res.data.token);
-        Cookies.set('Authorization', `bearer ${res.data.token}`, { expires: 1 });
-        axios.defaults.headers.common['Authorization'] = `bearer ${res.data.token}`  // for all requests
-        
+        Cookies.set("Authorization", `bearer ${res.data.token}`, {
+          expires: 1
+        });
+
+        axios.defaults.headers.common["Authorization"] = `bearer ${
+          res.data.token
+        }`; // for all requests
+
         Router.push("/");
       })
       .catch(err => {
@@ -73,6 +93,7 @@ class Login extends React.Component {
                       className="input100"
                       type="text"
                       name="email"
+                      value={this.state.email}
                       onChange={e => this.setState({ email: e.target.value })}
                     />
                     <span className="focus-input100" />
@@ -102,6 +123,10 @@ class Login extends React.Component {
                         id="ckb1"
                         type="checkbox"
                         name="remember-me"
+                        onChange={e => {
+                          this.setState({ rememberMe: e.target.checked });
+                        }}
+                        checked={this.state.rememberMe}
                       />
                       <label className="label-checkbox100" htmlFor="ckb1">
                         Lembrar
@@ -139,19 +164,13 @@ class Login extends React.Component {
                     <span className="txt2">Acesse usando</span>
                   </div>
 
-                  <div className="login100-form-social flex-c-m">
+                  <div className="login100-form-social flex-c-m" >
                     <a
-                      href="#"
+                      onClick={() => loginWithFacebook()}
+                      
                       className="login100-form-social-item flex-c-m bg1 m-r-5"
                     >
-                      <i className="fa fa-facebook-f" aria-hidden="true" />
-                    </a>
-
-                    <a
-                      href="#"
-                      className="login100-form-social-item flex-c-m bg2 m-r-5"
-                    >
-                      <i className="fa fa-twitter" aria-hidden="true" />
+                      <i  className="fa fa-facebook-f" aria-hidden="true" />
                     </a>
                   </div>
                 </div>

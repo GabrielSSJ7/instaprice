@@ -1,5 +1,5 @@
 import React from "react";
-import { bindActionCreators } from 'redux'
+import { bindActionCreators } from "redux";
 import io from "socket.io-client";
 import { connect } from "react-redux";
 
@@ -9,21 +9,20 @@ import Template from "../components/Template";
 import TopMenu from "../components/TopMenu";
 import BottomMenu from "../components/BottomMenu";
 
-import { startClock, addCount, serverRenderClock } from '../config/store'
+import { startClock, addCount, serverRenderClock } from "../config/store";
 import { getMainData } from "../config/actions/MainAction";
 
-const socketUrl = "http://192.168.15.14:4000";
+const socketUrl = "http://localhost:4000";
+
+let socket = null;
 
 class Index extends React.Component {
   constructor(props) {
     super(props);
-    const socket = io(socketUrl);
-    socket.on("connect", function() {
-      console.log("connected on Socket.Io", socket.id);
-    });
+   
   }
 
-static getInitialProps({ store, isServer, req }) {
+  static getInitialProps({ store, isServer, req }) {
     const cookie = req ? req.headers.cookie : "";
 
     if (cookie) {
@@ -33,22 +32,32 @@ static getInitialProps({ store, isServer, req }) {
       AuthToken = AuthToken.split("%20").join(" ");
 
       try {
-        store.dispatch(getMainData(AuthToken))
+        store.dispatch(getMainData(AuthToken));
 
-        return { };
+        return {};
       } catch (e) {
-
-        return {produto: []};
+        return { produto: [] };
       }
     }
 
-    return {  };
-
-
+    return {};
+  }
+  componentWillUnmount(){
+    
   }
 
   componentDidMount() {
+    // socket = io(socketUrl);
+    // socket.emit('desconectar', { reason: 'porque eu quis'})
+    // socket.on("connect", function() {
+    //   //console.log("connected on Socket.Io", socket.id);
+    // });
     validateToken(localStorage.getItem("authToken"));
+
+    // socket.on("usuarioSaiu", function(data) {
+    //   //socket.emit("usuarioSaiu",{ token: localStorage.getItem("authToken")})
+    //   console.log("usuario saiu", data);
+    // });
 
     if (this.props.produto.length === 0) {
       this.props.getMainData(`bearer ${localStorage.getItem("authToken")}`);
@@ -56,7 +65,6 @@ static getInitialProps({ store, isServer, req }) {
   }
 
   render() {
-    
     return (
       <Template>
         <TopMenu props={this.props} />
@@ -69,19 +77,18 @@ static getInitialProps({ store, isServer, req }) {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    getMainData: bindActionCreators(getMainData, dispatch),
-  }
-}
+    getMainData: bindActionCreators(getMainData, dispatch)
+  };
+};
 
 const mapStateToProps = state => {
-  console.log("state.main", state)
+  //console.log("state.main", state)
   return {
     produto: state.MainReducer.produto
-  }
-  
-}
+  };
+};
 
 export default connect(
   mapStateToProps,

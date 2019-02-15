@@ -39,3 +39,71 @@ static async getInitialProps({ store, isServer, req }) {
     produto: bindActionCreators(produto, dispatch)
   };
 };
+
+
+
+
+
+
+
+
+
+
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '{your-app-id}',
+      cookie     : true,
+      xfbml      : true,
+      version    : '{api-version}'
+    });
+      
+    FB.AppEvents.logPageView();   
+      
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+
+
+
+responseFacebook = async response => {
+    const data = {
+      nome: response.name,
+      email: response.email,
+      foto: FACEBOOK_PROFILE_PIC_URL(response.userID)
+    };
+
+    axios
+      .post(`${URL}signin-with-facebook`, data)
+      .then(res => {
+        localStorage.setItem("authToken", res.data.token);
+        Cookies.set("Authorization", `bearer ${res.data.token}`, {
+          expires: 1
+        });
+
+        axios.defaults.headers.common["Authorization"] = `bearer ${
+          res.data.token
+        }`; // for all requests
+
+        Router.push("/");
+      })
+      .catch(err => {});
+    // const res = await fetch(
+    //   `https://graph.facebook.com/me?fields=email&access_token=${response.accessToken}`);
+
+    // console.log(`https://graph.facebook.com/me?fields=email&access_token=${response.accessToken}`)
+    console.log(FACEBOOK_PROFILE_PIC_URL(response.userID));
+  };
+
+
+   // const res = await fetch(
+      //   `https://graph.facebook.com/me?fields=email&access_token=${response.accessToken}`);
